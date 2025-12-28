@@ -52,7 +52,10 @@ function getTime(date) {
  * '01 Jan 1970 00:00:00 UTC' => 'Thursday'
  * '03 Dec 1995 00:12:00 UTC' => 'Sunday'
  * '2024-01-30T00:00:00.000Z' => 'Tuesday'
- *   const days = [
+ *
+ */
+function getDayName(date) {
+  const days = [
     'Sunday',
     'Monday',
     'Tuesday',
@@ -62,9 +65,6 @@ function getTime(date) {
     'Saturday',
   ];
   return days[new Date(date).getDay()];
- */
-function getDayName(/* date */) {
-  throw new Error('Not implemented');
 }
 
 /**
@@ -186,10 +186,38 @@ function formatDate(dateStr) {
  * 12, 2023 => 10
  * 1, 2024 => 8
  */
-function getCountWeekendsInMonth(/* month, year */) {
-  throw new Error('Not implemented');
+function getCountWeekendsInMonth(month, year) {
+  const normalMonth = month - 1;
+  const firstDayOfMonth = new Date(year, normalMonth).getDay();
+  const currentMonth = new Date(year, normalMonth);
+  const daysInCurrentMonth =
+    Math.abs(currentMonth - new Date(year, normalMonth + 1)) / 86400000;
+  if (daysInCurrentMonth === 29) {
+    if (firstDayOfMonth === 6) {
+      return 9;
+    }
+    return 8;
+  }
+  if (daysInCurrentMonth === 30) {
+    if (firstDayOfMonth === 6) {
+      return 10;
+    }
+    if (firstDayOfMonth === 5 || firstDayOfMonth === 0) {
+      return 9;
+    }
+    return 8;
+  }
+  if (daysInCurrentMonth === 31) {
+    if (firstDayOfMonth === 0 || firstDayOfMonth === 4) {
+      return 9;
+    }
+    if (firstDayOfMonth === 5 || firstDayOfMonth === 6) {
+      return 10;
+    }
+    return 8;
+  }
+  return 8;
 }
-
 /**
  * Returns the week number of the year for a given date.
  * The first week of the year is defined according to ISO8601.
