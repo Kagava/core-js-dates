@@ -233,19 +233,19 @@ function getCountWeekendsInMonth(/* month, year */) {
  * Date(2024, 0, 31) => 5
  * Date(2024, 1, 23) => 8
  */
-function getWeekNumberByDate(/* date */) {
-  throw new Error('Not implemented');
-  // const currentDate = new Date(date);
-  // const currentMonth = currentDate.getUTCMonth();
-  // const currantDay = currentDate.getUTCDate();
-  // const currentYear = currentDate.getUTCFullYear();
-  // let countDays = currantDay;
-  // let i = 0;
-  // while (i < currentMonth) {
-  //   countDays += getCountDaysInMonth(i + 1, currentYear);
-  //   i += 1;
-  // }
-  // return Math.floor(countDays / 7) + 1;
+// Error online
+function getWeekNumberByDate(date) {
+  const currentDate = new Date(date);
+  const currentMonth = currentDate.getMonth();
+  const currantDay = currentDate.getDate();
+  const currentYear = currentDate.getFullYear();
+  let countDays = currantDay;
+  let i = 0;
+  while (i < currentMonth) {
+    countDays += getCountDaysInMonth(i + 1, currentYear);
+    i += 1;
+  }
+  return Math.floor(countDays / 7) + 1;
 }
 
 /**
