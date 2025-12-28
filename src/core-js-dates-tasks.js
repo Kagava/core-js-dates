@@ -235,10 +235,9 @@ function getCountWeekendsInMonth(/* month, year */) {
  */
 // Error online
 function getWeekNumberByDate(date) {
-  const currentDate = new Date(date);
-  const currentMonth = currentDate.getMonth();
-  const currantDay = currentDate.getDate();
-  const currentYear = currentDate.getFullYear();
+  const currentMonth = date.getMonth();
+  const currantDay = date.getUTCDate();
+  const currentYear = date.getFullYear();
   let countDays = currantDay;
   let i = 0;
   while (i < currentMonth) {
