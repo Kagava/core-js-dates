@@ -308,53 +308,54 @@ function getQuarter(date) {
  * { start: '01-01-2024', end: '15-01-2024' }, 1, 3 => ['01-01-2024', '05-01-2024', '09-01-2024', '13-01-2024']
  * { start: '01-01-2024', end: '10-01-2024' }, 1, 1 => ['01-01-2024', '03-01-2024', '05-01-2024', '07-01-2024', '09-01-2024']
  */
-function getWorkSchedule(period, countWorkDays, countOffDays) {
-  if (countWorkDays === 0) return [];
-  const copyPeriod = {};
-  Object.assign(copyPeriod, period);
-  let currentDate = Number(period.start.split('-')[0]);
-  let currentMonth = Number(period.start.split('-')[1]);
-  let currentYear = Number(period.start.split('-')[2]);
-  let daysInCurrentMonth = getCountDaysInMonth(currentMonth, currentYear);
-  let flagEnd = false;
-  const arraySchedule = [];
+function getWorkSchedule(/* period, countWorkDays, countOffDays */) {
+  throw new Error('Not implemented');
+  // if (countWorkDays === 0) return [];
+  // const copyPeriod = {};
+  // Object.assign(copyPeriod, period);
+  // let currentDate = Number(period.start.split('-')[0]);
+  // let currentMonth = Number(period.start.split('-')[1]);
+  // let currentYear = Number(period.start.split('-')[2]);
+  // let daysInCurrentMonth = getCountDaysInMonth(currentMonth, currentYear);
+  // let flagEnd = false;
+  // const arraySchedule = [];
 
-  function makeNextDay(flagOffDays) {
-    const currentDateStr = currentDate.toString().padStart(2, '0');
-    const currentMonthStr = currentMonth.toString().padStart(2, '0');
-    const dayWork = `${currentDateStr}-${currentMonthStr}-${currentYear}`;
-    if (!flagOffDays) arraySchedule.push(dayWork);
-    copyPeriod.start = dayWork;
-  }
+  // function makeNextDay(flagOffDays) {
+  //   const currentDateStr = currentDate.toString().padStart(2, '0');
+  //   const currentMonthStr = currentMonth.toString().padStart(2, '0');
+  //   const dayWork = `${currentDateStr}-${currentMonthStr}-${currentYear}`;
+  //   if (!flagOffDays) arraySchedule.push(dayWork);
+  //   copyPeriod.start = dayWork;
+  // }
 
-  function countDays(workOffDays, flagOffDays) {
-    for (let i = 0; i < workOffDays; i += 1) {
-      if (copyPeriod.start === copyPeriod.end) {
-        flagEnd = true;
-        break;
-      } else if (currentDate > daysInCurrentMonth) {
-        if (currentMonth === 12) {
-          currentYear += 1;
-          currentMonth = 1;
-          currentDate = 1;
-          daysInCurrentMonth = getCountDaysInMonth(currentMonth, currentYear);
-        } else {
-          currentMonth += 1;
-          currentDate = 1;
-          daysInCurrentMonth = getCountDaysInMonth(currentMonth, currentYear);
-        }
-      }
-      makeNextDay(flagOffDays);
-      currentDate += 1;
-    }
-  }
+  // function countDays(workOffDays, flagOffDays) {
+  //   for (let i = 0; i < workOffDays; i += 1) {
+  //     if (copyPeriod.start === copyPeriod.end) {
+  //       flagEnd = true;
+  //       break;
+  //     } else if (currentDate > daysInCurrentMonth) {
+  //       if (currentMonth === 12) {
+  //         currentYear += 1;
+  //         currentMonth = 1;
+  //         currentDate = 1;
+  //         daysInCurrentMonth = getCountDaysInMonth(currentMonth, currentYear);
+  //       } else {
+  //         currentMonth += 1;
+  //         currentDate = 1;
+  //         daysInCurrentMonth = getCountDaysInMonth(currentMonth, currentYear);
+  //       }
+  //     }
+  //     makeNextDay(flagOffDays);
+  //     currentDate += 1;
+  //   }
+  // }
 
-  while (!flagEnd) {
-    countDays(countWorkDays, 0);
-    countDays(countOffDays, 1);
-  }
+  // while (!flagEnd) {
+  //   countDays(countWorkDays, 0);
+  //   countDays(countOffDays, 1);
+  // }
 
-  return arraySchedule;
+  // return arraySchedule;
 }
 
 /**
